@@ -1,0 +1,23 @@
+{
+  "name": "home-automation",
+  "version": "0.0.1",
+  "private": true,
+  "description": "This is likely not useful to anyone. Notes on home automation system setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mreinstein/home-automation.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mreinstein/home-automation/issues"
+  },
+  "homepage": "https://github.com/mreinstein/home-automation#readme",
+  "dependencies": {
+    "node-lifx": "^0.6.0"
+  }
+}
