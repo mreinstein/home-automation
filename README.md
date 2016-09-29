@@ -58,8 +58,10 @@ The idea is the raspberry pi nodes become simple streaming microphones which pas
 * http://www.aeronetworks.ca/2015/09/audio-networking-with-sox-and-netcat.html
 * https://prupert.wordpress.com/2010/08/02/stream-live-audio-from-a-microphone-in-near-real-time-in-ubuntu/
 
+### lucida speech rec
 
-### kaldi speech rec
-supposedly more accurate than sphinx
+lucida is marketing itself as an open source siri. it includes a speech recognition engine based on [kaldi](https://github.com/kaldi-asr/kaldi)
+which I've heard from a few places is more accurate than CMU sphinx.
 
-* https://github.com/kaldi-asr/kaldi
+https://github.com/claritylab/lucida/tree/master/lucida/speechrecognition
+
