@@ -1,0 +1,93 @@
+Language model created by QuickLM on Thu Sep  1 02:03:33 EDT 2016
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 14 sentences and 15 words
+
+\data\
+ngram 1=15
+ngram 2=29
+ngram 3=26
+
+\1-grams:
+-0.8873 </s> -0.3010
+-0.8873 <s> -0.2218
+-2.0334 EVENING -0.2762
+-1.7324 GOOD -0.2888
+-1.2553 LIGHT -0.2121
+-1.4314 LIGHTS -0.2121
+-1.7324 MORNING -0.2121
+-2.0334 NIGHT -0.2407
+-1.7324 OFF -0.2407
+-2.0334 OKAY -0.2407
+-1.7324 ON -0.2407
+-1.7324 OUT -0.2407
+-2.0334 READING -0.2762
+-2.0334 SLEEPY -0.2970
+-2.0334 TIME -0.2407
+
+\2-grams:
+-1.4472 <s> EVENING 0.0000
+-1.1461 <s> GOOD 0.0000
+-0.9700 <s> LIGHT -0.1761
+-0.8451 <s> LIGHTS 0.0000
+-1.4472 <s> MORNING -0.1761
+-1.4472 <s> OKAY 0.0000
+-1.4472 <s> READING 0.0000
+-1.4472 <s> SLEEPY 0.0000
+-0.3010 EVENING LIGHT -0.1761
+-0.6021 GOOD MORNING -0.1761
+-0.6021 GOOD NIGHT 0.0000
+-0.6021 LIGHT </s> -0.3010
+-1.0792 LIGHT OFF 0.0000
+-1.0792 LIGHT ON 0.0000
+-1.0792 LIGHT OUT 0.0000
+-0.9031 LIGHTS </s> -0.3010
+-0.9031 LIGHTS OFF 0.0000
+-0.9031 LIGHTS ON 0.0000
+-0.9031 LIGHTS OUT 0.0000
+-0.6021 MORNING </s> -0.3010
+-0.6021 MORNING LIGHT -0.1761
+-0.3010 NIGHT </s> -0.3010
+-0.3010 OFF </s> -0.3010
+-0.3010 OKAY </s> -0.3010
+-0.3010 ON </s> -0.3010
+-0.3010 OUT </s> -0.3010
+-0.3010 READING LIGHT -0.1761
+-0.3010 SLEEPY TIME 0.0000
+-0.3010 TIME </s> -0.3010
+
+\3-grams:
+-0.3010 <s> EVENING LIGHT
+-0.6021 <s> GOOD MORNING
+-0.6021 <s> GOOD NIGHT
+-0.7782 <s> LIGHT OFF
+-0.7782 <s> LIGHT ON
+-0.7782 <s> LIGHT OUT
+-0.9031 <s> LIGHTS </s>
+-0.9031 <s> LIGHTS OFF
+-0.9031 <s> LIGHTS ON
+-0.9031 <s> LIGHTS OUT
+-0.3010 <s> MORNING LIGHT
+-0.3010 <s> OKAY </s>
+-0.3010 <s> READING LIGHT
+-0.3010 <s> SLEEPY TIME
+-0.3010 EVENING LIGHT </s>
+-0.3010 GOOD MORNING </s>
+-0.3010 GOOD NIGHT </s>
+-0.3010 LIGHT OFF </s>
+-0.3010 LIGHT ON </s>
+-0.3010 LIGHT OUT </s>
+-0.3010 LIGHTS OFF </s>
+-0.3010 LIGHTS ON </s>
+-0.3010 LIGHTS OUT </s>
+-0.3010 MORNING LIGHT </s>
+-0.3010 READING LIGHT </s>
+-0.3010 SLEEPY TIME </s>
+
+\end\
