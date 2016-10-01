@@ -5,12 +5,14 @@ This is likely not useful to anyone. Documenting how to set up my home automatio
 |- 3461.*
 |- asound.conf
 |- speech-rec.sh
+|- language-model.txt
 `- wpa_supplicant.conf
 ```
 
 * 3461.* sphinx dictionary and language models
 * asound.confg  my `/etc/asound.conf` file, configured to use MXL AC404 microphone
 * speech-rec.sh my ultra-ghetto speech rec/light control script
+* language-model.txt   source file used to generate the dictionary and language models using [this tool](http://www.speech.cs.cmu.edu/tools/lmtool-new.html)
 * wpa_supplicant.conf my `/etc/wpa_supplicant/wpa_supplicant.conf` file, with ap and passphrase removed
 
 ## miscellaneous
