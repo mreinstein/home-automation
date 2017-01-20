@@ -1,0 +1,20 @@
+[Unit]
+Description=home automation service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/home-automation
+ExecStart=/usr/bin/node /home/pi/home-automation/index.js
+Environment="NODE_ENV=production"
+Environment="AWS_REGION=us-east-1"
+Restart=on-failure
+KillSignal=SIGINT
+# Tag things in the log
+SyslogIdentifier=home-automation
+#StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

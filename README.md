@@ -15,11 +15,20 @@ This is likely not useful to anyone. Documenting how to set up my home automatio
 * language-model.txt   source file used to generate the dictionary and language models using [this tool](http://www.speech.cs.cmu.edu/tools/lmtool-new.html)
 * wpa_supplicant.conf my `/etc/wpa_supplicant/wpa_supplicant.conf` file, with ap and passphrase removed
 
+
+## run the server automatically at boot, restart on failure
+
+```bash
+sudo cp home-automation.service /lib/systemd/system/
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable home-automation.service
+
+sudo systemctl start home-automation.service
+```
+
 ## miscellaneous
-[running nodejs process as systemd service](https://thomashunter.name/blog/running-a-node-js-process-on-debian-as-a-systemd-service/?utm_source=nodeweekly&utm_medium=email)
-
-[using screen to keep things running](https://lhcb.github.io/analysis-essentials/shell/screen.html)
-
 [using rsync to backup to an external drive](http://serverfault.com/questions/25329/using-rsync-to-backup-to-an-external-drive)
 
 [btsync, the bittorrent client I'm using](https://itunes.apple.com/us/app/bittorrent-sync-file-transfer/id665156116)
