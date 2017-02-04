@@ -73,50 +73,6 @@ detector.on('hotword', function (index, hotword) {
 })
 
 
-/*
-const micInstance = mic({ 'rate': '16000', 'channels': '1', 'debug': false, 'exitOnSilence': 2 })
-const micInputStream = micInstance.getAudioStream()
-
-const recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000' })
-
-
-micInputStream.on('processExitComplete', function() {
-  console.log("Got SIGNAL processExitComplete")
-})
-
-micInputStream.on('stopComplete', function() {
-  console.log("Got SIGNAL stopComplete");
-})
-
-micInputStream.on('silence', function() {
-  console.log("Got SIGNAL silence");
-})
-
-micInputStream.on('pauseComplete', function() {
-  console.log("Got SIGNAL pauseComplete");
-  setTimeout(function() {
-    micInstance.resume()
-  }, 5000)
-})
-
-
-micInputStream.on('error', function(err) {
-  cosole.log("Error in Input Stream: " + err)
-})
-
-micInputStream.on('end', function() {
-  cosole.log("End stream: ")
-})
-
-
-micInputStream
-  .pipe(recognizerStream)
-  .pipe(process.stdout)
-
-micInstance.start()
-*/
-
-
 const off_commands = [
   'LIGHTS OFF',
   'LIGHTS OUT',
