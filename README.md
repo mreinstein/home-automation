@@ -1,22 +1,19 @@
 
-This is likely not useful to anyone. Documenting how to set up my home automation systems. For now just a link dump.
+Notes, links, and prototypes related to my home automation system experiments.
 
 ```
 |- prototype/
 |- sphinx-prototype/
-   |- 3461.*
-   |- asound.conf
-   |- speech-rec.sh
-   `- language-model.txt
+|- asound.conf
+|- home-automation.service
 `- wpa_supplicant.conf
 ```
 
-* `prototype/` watson/snowboy prototype
-* sphinx-prototype/3461.* sphinx dictionary and language models
-* sphinx-prototype/speech-rec.sh my ultra-ghetto speech rec/light control script
-* sphinx-prototype/language-model.txt   source file used to generate the dictionary and language models using [this tool](http://www.speech.cs.cmu.edu/tools/lmtool-new.html)
-* asound.confg  my `/etc/asound.conf` file, configured to use MXL AC404 microphone
-* wpa_supplicant.conf my `/etc/wpa_supplicant/wpa_supplicant.conf` file, with ap and passphrase removed
+* `prototype/` watson/snowboy prototype (v2)
+* `sphinx-prototype/` CMU Sphinx prototype (v1)
+* `asound.confg`  my `~/.asound.rc` file, configured to use MXL AC404 microphone
+* `home-automation.service` systemd install script
+* `wpa_supplicant.conf` my `/etc/wpa_supplicant/wpa_supplicant.conf` file, with AP and passphrase removed
 
 
 ## run the server automatically at boot, restart on failure
@@ -43,14 +40,6 @@ https://melgrubb.com/2014/08/01/raspberry-pi-home-server-index/
 I don't use all of the above. it's too much crap for one machine. I follow most of steps 2, 3, 6, 14
 
 
-
-## raspberry pi speech rec
-
-* https://wolfpaulus.com/journal/embedded/raspberrypi2-sr/ - really great tutorial for getting spinx setup on raspberry pi
-* http://cmusphinx.sourceforge.net/wiki/raspberrypi   - some useful bits around sound handling
-* http://cmusphinx.sourceforge.net/wiki/tutorialtuning  - haven't tried tuning but this gives good pointers possibly worth trying
-
-
 ## LIFX lighting
 
 * https://github.com/magicmonkey/lifxjs
@@ -71,6 +60,7 @@ The idea is the raspberry pi nodes become simple streaming microphones which pas
 * http://www.linuxquestions.org/questions/slackware-14/send-audio-over-network-888169/
 * http://www.aeronetworks.ca/2015/09/audio-networking-with-sox-and-netcat.html
 * https://prupert.wordpress.com/2010/08/02/stream-live-audio-from-a-microphone-in-near-real-time-in-ubuntu/
+
 
 ### lucida speech rec
 
