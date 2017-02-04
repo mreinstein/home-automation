@@ -57,11 +57,11 @@ detector.on('hotword', function (index, hotword) {
 
     recognizerStream.on('error', function(event) {
       console.log('er', event)
+      mode = 'IDLE'
     })
 
     recognizerStream.on('close', function(event) {
       mode = 'IDLE'
-      console.log('FIN')
     })
 
     recognizerStream.on('data', function(data) {
