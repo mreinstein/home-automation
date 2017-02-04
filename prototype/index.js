@@ -5,7 +5,6 @@ const Models   = require('snowboy').Models
 const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
 const lifx     = require('node-lifx').Client
-//const mic    = require('mic')
 const record   = require('node-record-lpcm16')
 
 

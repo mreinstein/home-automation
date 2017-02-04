@@ -2,7 +2,7 @@
   "name": "prototype",
   "version": "0.0.1",
   "private": true,
-  "description": "",
+  "description": "home automation prototype based on watson and snowboy",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,8 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "lifx": "^0.3.1",
-    "mic": "^2.1.1",
     "node-lifx": "^0.8.0",
     "node-record-lpcm16": "^0.2.0",
     "snowboy": "^1.1.0",
