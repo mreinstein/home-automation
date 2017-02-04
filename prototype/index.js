@@ -149,7 +149,7 @@ let client = new lifx()
 
 client.on('light-new', function(light) {
   lights.push(light)
-  console.log('new light found!', light)
+  console.log('new light found!', light.id)
 })
 
 client.init()

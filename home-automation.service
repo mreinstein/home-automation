@@ -6,8 +6,8 @@ After=syslog.target network.target
 Type=simple
 User=pi
 Group=pi
-WorkingDirectory=/home/pi/home-automation
-ExecStart=/usr/bin/node /home/pi/home-automation/index.js
+WorkingDirectory=/home/pi/home-automation/prototype
+ExecStart=/usr/bin/node /home/pi/home-automation/prototype/index.js
 Environment="NODE_ENV=production"
 Environment="AWS_REGION=us-east-1"
 Restart=on-failure
