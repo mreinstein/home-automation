@@ -2,6 +2,7 @@
 Notes, links, and prototypes related to my home automation system experiments.
 
 ```
+|- chromecasting/
 |- prototype/
 |- sphinx-prototype/
 |- asound.conf
