@@ -14,10 +14,23 @@ const record   = require('node-record-lpcm16')
 const opts = {
   format: 'pcm',
   region: 'us-east-1',
-  text: 'Hello, my name is Boswell. How are you today Ted?',
+  text: 'Ready!',
   voice: 'Joey',
   sampleRate: 16000
 }
+
+// http://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
+// pcm is in signed 16-bit, 1 channel (mono), little-endian format
+// https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
+const url = polly.getSynthesizeSpeechUrl({
+  OutputFormat: opts.format,
+
+  // Valid values for pcm are "8000" and "16000" The default value is "16000"
+  SampleRate: opts.sampleRate.toString(),
+
+  Text: opts.text,
+  VoiceId: opts.voice
+}, halfHourInSeconds)
 
 const polly = new Polly({
   apiVersion: '2016-06-10',
@@ -74,20 +87,6 @@ detector.on('error', function () {
 })
 
 detector.on('hotword', function (index, hotword) {
-  // http://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
-
-  // pcm is in signed 16-bit, 1 channel (mono), little-endian format
-  // https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
-  const url = polly.getSynthesizeSpeechUrl({
-    OutputFormat: opts.format,
-
-    // Valid values for pcm are "8000" and "16000" The default value is "16000"
-    SampleRate: opts.sampleRate.toString(),
-
-    Text: opts.text,
-    VoiceId: opts.voice
-  }, halfHourInSeconds)
-
 
   https.get(url, function(res) {
     res.pipe(speaker)
