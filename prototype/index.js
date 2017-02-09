@@ -2,10 +2,37 @@
 
 const Detector = require('snowboy').Detector
 const Models   = require('snowboy').Models
+const Polly    = require('aws-sdk/clients/polly').Presigner
+const Speaker  = require('speaker')
 const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
+const https    = require('https')
 const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
+
+
+const opts = {
+  format: 'pcm',
+  region: 'us-east-1',
+  text: 'Hello, my name is Boswell. How are you today Ted?',
+  voice: 'Joey',
+  sampleRate: 16000
+}
+
+const polly = new Polly({
+  apiVersion: '2016-06-10',
+  region: opts.region
+})
+
+const halfHourInSeconds = 30 * 60
+
+
+const speaker = new Speaker({
+  channels: 1,          // 2 channels 
+  bitDepth: 16,         // 16-bit samples 
+  sampleRate: opts.sampleRate,
+  signed: true
+});
 
 
 const speech_to_text = new STT({
@@ -47,6 +74,25 @@ detector.on('error', function () {
 })
 
 detector.on('hotword', function (index, hotword) {
+  // http://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
+
+  // pcm is in signed 16-bit, 1 channel (mono), little-endian format
+  // https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
+  const url = polly.getSynthesizeSpeechUrl({
+    OutputFormat: opts.format,
+
+    // Valid values for pcm are "8000" and "16000" The default value is "16000"
+    SampleRate: opts.sampleRate.toString(),
+
+    Text: opts.text,
+    VoiceId: opts.voice
+  }, halfHourInSeconds)
+
+
+  https.get(url, function(res) {
+    res.pipe(speaker)
+  })
+
   console.log('hotword', index, hotword)
   if(mode === 'IDLE') {
     console.log('READY')
