@@ -24,6 +24,8 @@ const polly = new Polly({
   region: opts.region
 })
 
+const halfHourInSeconds = 30 * 60
+
 // http://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
 // pcm is in signed 16-bit, 1 channel (mono), little-endian format
 // https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
@@ -36,7 +38,6 @@ const url = polly.getSynthesizeSpeechUrl({
   Text: opts.text,
   VoiceId: opts.voice
 }, halfHourInSeconds)
-const halfHourInSeconds = 30 * 60
 
 
 const speaker = new Speaker({
