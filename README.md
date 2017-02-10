@@ -6,28 +6,14 @@ Notes, links, and prototypes related to my home automation system experiments.
 |- prototype/
 |- sphinx-prototype/
 |- asound.conf
-|- home-automation.service
 `- wpa_supplicant.conf
 ```
 
 * `prototype/` watson/snowboy prototype (v2)
 * `sphinx-prototype/` CMU Sphinx prototype (v1)
 * `asound.confg`  my `~/.asound.rc` file, configured to use MXL AC404 microphone
-* `home-automation.service` systemd install script
 * `wpa_supplicant.conf` my `/etc/wpa_supplicant/wpa_supplicant.conf` file, with AP and passphrase removed
 
-
-## run the server automatically at boot, restart on failure
-
-```bash
-sudo cp home-automation.service /lib/systemd/system/
-
-sudo systemctl daemon-reload
-
-sudo systemctl enable home-automation.service
-
-sudo systemctl start home-automation.service
-```
 
 ## miscellaneous
 [using rsync to backup to an external drive](http://serverfault.com/questions/25329/using-rsync-to-backup-to-an-external-drive)
