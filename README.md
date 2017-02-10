@@ -34,9 +34,17 @@ sudo systemctl start home-automation.service
 
 [btsync, the bittorrent client I'm using](https://itunes.apple.com/us/app/bittorrent-sync-file-transfer/id665156116)
 
+how to make a raspberry pi bootable from a usb drive rather than booting off SD card: https://github.com/raspberrypi/documentation/blob/master/hardware/raspberrypi/bootmodes/msd.md
+
+how to fix the keyboard when characters don't all show up: https://www.raspberrypi.org/forums/viewtopic.php?f=50&t=40294
+
+(note to self: that crappy ihome keyboard I'm using is a 104 key generic)
+
+https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md
+
 ## bittorrent sync (resilio) setup
 
-https://melgrubb.com/2014/08/01/raspberry-pi-home-server-index/
+https://melgrubb.com/2016/12/11/rphs-v2-introduction/
 
 I don't use all of the above. it's too much crap for one machine. I follow most of steps 2, 3, 6, 14
 
