@@ -20,7 +20,7 @@ and amazon polly for text to speech.
 ## installation
 
 ```bash
-./install.sh ; npm install
+./install.sh
 ```
 
 ## configure the voice interaction agent to run automatically at boot, restart on failure
