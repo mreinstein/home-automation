@@ -41,14 +41,6 @@ const url = polly.getSynthesizeSpeechUrl({
 }, halfHourInSeconds)
 
 
-const speaker = new Speaker({
-  channels: 1,          // 2 channels 
-  bitDepth: 16,         // 16-bit samples 
-  sampleRate: opts.sampleRate,
-  signed: true
-});
-
-
 const speech_to_text = new STT({
   username: process.env.WATSON_USERNAME,
   password: process.env.WATSON_PASSWORD
@@ -89,7 +81,14 @@ detector.on('error', function () {
 
 detector.on('hotword', function (index, hotword) {
 
-  fs.createReadStream(__dirname + '/resources/3.wav').pipe(speaker)
+  const speaker = new Speaker({
+    channels: 1,          // 2 channels 
+    bitDepth: 16,         // 16-bit samples 
+    sampleRate: 44100,
+    signed: true
+  });
+
+  fs.createReadStream(__dirname + '/resources/1.wav').pipe(speaker)
 
   /*
   https.get(url, function(res) {
