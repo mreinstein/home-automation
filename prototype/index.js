@@ -6,6 +6,7 @@ const Polly    = require('aws-sdk/clients/polly').Presigner
 const Speaker  = require('speaker')
 const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
+const fs       = require('fs')
 const https    = require('https')
 const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
@@ -88,9 +89,13 @@ detector.on('error', function () {
 
 detector.on('hotword', function (index, hotword) {
 
+  fs.createReadStream(__dirname + '/resources/3.wav').pipe(speaker)
+
+  /*
   https.get(url, function(res) {
     res.pipe(speaker)
   })
+  */
 
   console.log('hotword', index, hotword)
   if(mode === 'IDLE') {
