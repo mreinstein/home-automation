@@ -12,6 +12,9 @@ const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
 
 
+// playing a shoutcast station
+//mpg123 -C http://206.190.150.90:8301/stream
+
 const opts = {
   format: 'pcm',
   region: 'us-east-1',
@@ -82,8 +85,8 @@ detector.on('error', function () {
 detector.on('hotword', function (index, hotword) {
 
   const speaker = new Speaker({
-    channels: 1,          // 2 channels 
-    bitDepth: 16,         // 16-bit samples 
+    channels: 2,          // 2 channels 
+    bitDepth: 32,         // 16-bit samples 
     sampleRate: 44100,
     signed: true
   });
