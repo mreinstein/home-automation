@@ -19,7 +19,7 @@ const opts = {
   format: 'pcm',
   region: 'us-east-1',
   text: 'Ready!',
-  voice: 'Joey',
+  voice: 'Brian',
   sampleRate: 16000
 }
 
@@ -89,11 +89,19 @@ detector.on('hotword', function (index, hotword) {
     bitDepth: 32,         // 16-bit samples 
     sampleRate: 44100,
     signed: true
-  });
+  })
 
   fs.createReadStream(__dirname + '/resources/1.wav').pipe(speaker)
 
   /*
+
+  const speaker = new Speaker({
+    channels: 1,          // 2 channels 
+    bitDepth: 16,         // 16-bit samples 
+    sampleRate: 16000,
+    signed: true
+  });
+
   https.get(url, function(res) {
     res.pipe(speaker)
   })
@@ -104,10 +112,10 @@ detector.on('hotword', function (index, hotword) {
     console.log('READY')
     mode = 'LISTENING'
 
-    const recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: false })
+    const recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 1 })
 
     recognizerStream.on('error', function(event) {
-      console.log('er', event)
+      //console.log('er', event)
       mode = 'IDLE'
     })
 
