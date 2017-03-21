@@ -12,7 +12,7 @@ const http = require('http'),
 
 
 http.createServer(function (req, res) {
-  const filePath = __dirname + '/public/shadow-of-a-doubt.mp4'
+  const filePath = __dirname + '/La-La-Land.mp4'
   //var filePath = '/Users/michaelreinstein/Movies/raw/title00.mkv'
   const stat = fs.statSync(filePath)
   const total = stat.size
@@ -21,9 +21,10 @@ http.createServer(function (req, res) {
   if (req.headers['range']) {
     const part = rangeParser(total, req.headers.range)[0]
 
-    console.log('RANGE: ' + part.start + ' - ' + part.end + ' = ' + chunksize)
-
     const chunksize = (part.end - part.start) + 1
+
+    console.log('RANGE: ' + part.start + ' - ' + part.end + ' = ' + chunksize)
+    
     const file = fs.createReadStream(filePath, {start: part.start, end: part.end})
 
     res.writeHead(206, {
@@ -38,7 +39,7 @@ http.createServer(function (req, res) {
   } else {
     console.log('ALL: ' + total)
     res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' })
-    fs.createReadStream(path).pipe(res)
+    fs.createReadStream(filePath).pipe(res)
   }
 }).listen(8000)
 console.log('Server running at http://127.0.0.1:8000/')

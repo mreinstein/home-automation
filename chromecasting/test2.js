@@ -5,7 +5,7 @@ var browser = new ChromecastAPI.Browser()
  
 browser.on('deviceOn', function (device) {
     //var urlMedia = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4';
-    var urlMedia = 'http://10.0.0.116:8000/marnie.mp4';
+    var urlMedia = 'http://192.168.42.66:8000/La-La-Land.mp4';
  
     device.play(urlMedia, 0, function () {
         console.log('Playing in your chromecast')
