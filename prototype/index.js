@@ -18,7 +18,7 @@ const record   = require('node-record-lpcm16')
 const opts = {
   format: 'pcm',
   region: 'us-east-1',
-  text: 'Ready!',
+  text: 'Ready.',
   voice: 'Brian',
   sampleRate: 16000
 }
@@ -112,7 +112,7 @@ detector.on('hotword', function (index, hotword) {
     console.log('READY')
     mode = 'LISTENING'
 
-    const recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 1 })
+    const recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 1, interim_results: false })
 
     recognizerStream.on('error', function(event) {
       //console.log('er', event)
@@ -120,11 +120,15 @@ detector.on('hotword', function (index, hotword) {
     })
 
     recognizerStream.on('close', function(event) {
+      console.log('watson speech socket closed')
       mode = 'IDLE'
     })
 
     recognizerStream.on('data', function(data) {
-      processInput(data.toString())
+      let failed = processInput(data.toString())
+      if (failed) {
+        recognizerStream.close()
+      }
     })
 
     mic.pipe(recognizerStream).pipe(process.stdout)
@@ -194,13 +198,14 @@ function toggleLight(light, duration=0) {
   })
 }
 
+// returns true on failure (no command recognized)
 function processInput(data) {
   data = data.toString().trim().toUpperCase()
-  if(data.length === 0) return
+  if(data.length === 0) return true
 
   console.log('command:', data)
 
-  if(lights.length === 0) return
+  if(lights.length === 0) return true
 
   if(data.indexOf('EVENING LIGHT') > -1) {
     setColor(lights[0], 29, 100, 50, 3500, 1000)
@@ -216,6 +221,8 @@ function processInput(data) {
     console.log('lights on')
   } else if(data === 'LIGHT' || data === 'LIGHTS') {
     toggleLight(lights[0], 800)
+  } else {
+    return true
   }
 }
 
