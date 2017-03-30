@@ -47,31 +47,13 @@ function toggleLight(light, duration=0) {
 
 function idleState() {
   let mic
-  const models = new Models()
-
-  models.add({
-    file: __dirname + '/resources/stanley-mike-pi.pmdl',
-
-    // Detection sensitivity controls how sensitive the detection is.
-    // It is a value between 0 and 1. Increasing the sensitivity value
-    // leads to better detection rate, but also higher false alarm rate.
-    // It is an important parameter that you should play with in your 
-    sensitivity: '0.5',
-    hotwords : 'stanley'
-  })
-
-  models.add({
-    file: __dirname + '/resources/stanley-heather-pi.pmdl',
-    sensitivity: '0.5',
-    hotwords : 'stanley'
-  })
-
+  
   const detector = new Detector({
     resource: __dirname + '/resources/common.res',
     models: models,
 
     // audioGain controls whether to increase (>1) or decrease (<1) input volume.
-    audioGain: 2.0
+    audioGain: 1.0
   })
 
   detector.on('error', function (er) {
@@ -103,7 +85,7 @@ function idleState() {
 
 function listeningState() {
   let enter = async function() {
-    const choices = [ 'acknowledged', 'at your service' ]
+    const choices = [ 'acknowledged', 'at your service', 'Hiya' ]
     const conf = choices[Math.floor(Math.random() * choices.length)]
 
     await tts(conf)
@@ -174,7 +156,7 @@ function recordingState() {
       lights[0].off(600)
     } else if (isCommand(data, on_commands)) {
       lights[0].on(1200)
-    } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S') {
+    } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S' || data === 'LETS') {
       toggleLight(lights[0], 800)
     }
   }
@@ -185,6 +167,25 @@ function recordingState() {
 
 // playing a shoutcast station
 //mpg123 -C http://206.190.150.90:8301/stream
+const models = new Models()
+
+models.add({
+  file: __dirname + '/resources/stanley-mike-pi.pmdl',
+
+  // Detection sensitivity controls how sensitive the detection is.
+  // It is a value between 0 and 1. Increasing the sensitivity value
+  // leads to better detection rate, but also higher false alarm rate.
+  // It is an important parameter that you should play with in your 
+  sensitivity: '0.5',
+  hotwords : 'stanley'
+})
+
+models.add({
+  file: __dirname + '/resources/stanley-heather-pi.pmdl',
+  sensitivity: '0.5',
+  hotwords : 'stanley'
+})
+
 
 const off_commands = [
   'LIGHTS OFF',
