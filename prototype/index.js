@@ -103,7 +103,7 @@ function idleState() {
 
 function listeningState() {
   let enter = async function() {
-    const choices = [ 'acknowledged', 'at your service', "I'm here;" ]
+    const choices = [ 'acknowledged', 'at your service' ]
     const conf = choices[Math.floor(Math.random() * choices.length)]
 
     await tts(conf)
