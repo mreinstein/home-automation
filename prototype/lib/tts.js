@@ -2,8 +2,8 @@
 
 const Polly        = require('aws-sdk/clients/polly').Presigner
 const Speaker      = require('speaker')
-const getVoiceName = require('./get-voice-name')
 //const fs           = require('fs')
+const getVoiceName = require('./get-voice-name')
 const https        = require('https')
 
 
@@ -36,13 +36,10 @@ function getPollyTTSURL(text) {
 
 module.exports = async function tts(text) {
   return new Promise(function(resolve, reject) {
-    console.log('getting url for text', text)
-    const ttsURL = getPollyTTSURL(text)
-
-    console.log('url:', ttsURL)
+    let ttsURL = getPollyTTSURL(text)
     https.get(ttsURL, function(res) {
       const speaker = new Speaker({
-        channels: 1,          // 2 channels 
+        channels: 1,
         bitDepth: 16,         // 16-bit samples 
         sampleRate: 16000,
         signed: true

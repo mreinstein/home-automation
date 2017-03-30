@@ -103,7 +103,10 @@ function idleState() {
 
 function listeningState() {
   let enter = async function() {
-    await tts('Ready.')
+    const choices = [ 'acknowledged', 'at your service', "I'm here;" ]
+    const conf = choices[Math.floor(Math.random() * choices.length)]
+
+    await tts(conf)
     fsm.setState('RECORDING')
   }
 
@@ -129,7 +132,7 @@ function recordingState() {
       verbose: false
     })
 
-    recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 1 })
+    recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 2 })
 
     recognizerStream.on('error', function(event) {
       //console.log('er', event)
@@ -171,8 +174,7 @@ function recordingState() {
       lights[0].off(600)
     } else if (isCommand(data, on_commands)) {
       lights[0].on(1200)
-      console.log('lights on')
-    } else if(data === 'LIGHT' || data === 'LIGHTS') {
+    } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S') {
       toggleLight(lights[0], 800)
     }
   }
@@ -212,6 +214,7 @@ client.on('light-new', function(light) {
 })
 
 client.init()
+
 
 const fsm = state()
 fsm.addState('IDLE', idleState())
