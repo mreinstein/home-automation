@@ -50,7 +50,7 @@ function idleState() {
   const models = new Models()
 
   models.add({
-    file: __dirname + '/resources/stanley-mike.pmdl',
+    file: __dirname + '/resources/stanley-mike-pi.pmdl',
 
     // Detection sensitivity controls how sensitive the detection is.
     // It is a value between 0 and 1. Increasing the sensitivity value
@@ -61,7 +61,7 @@ function idleState() {
   })
 
   models.add({
-    file: __dirname + '/resources/stanley-heather.pmdl',
+    file: __dirname + '/resources/stanley-heather-pi.pmdl',
     sensitivity: '0.5',
     hotwords : 'stanley'
   })
