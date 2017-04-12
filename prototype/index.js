@@ -5,7 +5,7 @@ const dotenv   = require('dotenv').config()
 const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
 const snowboy  = require('./lib/snowboy')
-const state    = require('./lib/finite-state-machine')
+const state    = require('./lib/async-finite-state-machine')
 const tts      = require('./lib/tts')
 
 
@@ -13,7 +13,7 @@ function idleState() {
   let detector
 
   let enter = async function() {
-    await sleep(500)
+    //await sleep(500)
 
     detector = snowboy()
 
@@ -24,7 +24,7 @@ function idleState() {
 
     detector.on('hotword', async function(index, hotword) {
       console.log('hotword', index, hotword)
-      fsm.setState('LISTENING')
+      await fsm.setState('LISTENING')
     })
 
     record.start({
@@ -153,10 +153,6 @@ function listeningState() {
     const conf = choices[Math.floor(Math.random() * choices.length)]
     await tts(conf)
     fsm.setState('RECORDING')
-  }
-
-  let exit = function() {
-
   }
 
   return Object.freeze({ enter, exit })

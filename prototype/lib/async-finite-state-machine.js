@@ -8,7 +8,7 @@ module.exports = function fsm() {
     states[stateName] = state
   }
 
-  let setState = function(stateName, ...args) {
+  let setState = async function(stateName, ...args) {
     if (stateName === currentState) {
       return // already in the state
     }
@@ -20,12 +20,12 @@ module.exports = function fsm() {
     if (currentState) {
       console.log('exiting state', currentState)
       if(states[currentState].exit)
-        states[currentState].exit()
+        await states[currentState].exit()
     }
 
     console.log('entering state', stateName)
     currentState = stateName
-    states[currentState].enter(...args)
+    await states[currentState].enter(...args)
   }
 
   return Object.freeze({ addState, setState })
