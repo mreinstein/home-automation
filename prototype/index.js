@@ -149,11 +149,11 @@ function toggleLight(light, duration=0) {
 function listeningState() {
   const choices = [ 'acknowledged', 'at your service', 'Hiya', 'Yes?' ]
 
-  let enter = async function() {
+  let enter = function() {
     fsm.setState('RECORDING')
   }
 
-  let exit = function() {
+  let exit = async function() {
     const conf = choices[Math.floor(Math.random() * choices.length)]
     await tts(conf)
   }
