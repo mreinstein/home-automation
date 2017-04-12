@@ -10,14 +10,11 @@ const tts      = require('./lib/tts')
 
 
 function idleState() {
-  //let mic
-
   let detector
 
   let enter = async function() {
-    await sleep(500)
+    await sleep(100)
 
-    console.log('ready from nap. lets rock!')
     detector = snowboy()
 
     /*
@@ -32,13 +29,12 @@ function idleState() {
 
     record.start({
       threshold: 0,
-      verbose: true
+      verbose: false
     }).pipe(detector)
   }
 
   let exit = function() {
     record.stop()
-    //mic.unpipe(detector)
   }
 
   return Object.freeze({ enter, exit })
@@ -151,16 +147,15 @@ function toggleLight(light, duration=0) {
 
 
 function listeningState() {
-  let enter = async function() {
-    const choices = [ 'acknowledged', 'at your service', 'Hiya' ]
-    const conf = choices[Math.floor(Math.random() * choices.length)]
+  const choices = [ 'acknowledged', 'at your service', 'Hiya', 'Yes?' ]
 
-    await tts(conf)
+  let enter = async function() {
     fsm.setState('RECORDING')
   }
 
   let exit = function() {
-
+    const conf = choices[Math.floor(Math.random() * choices.length)]
+    await tts(conf)
   }
 
   return Object.freeze({ enter, exit })
