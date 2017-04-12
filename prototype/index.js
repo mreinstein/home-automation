@@ -73,7 +73,6 @@ function recordingState() {
   let exit = function() {
     record.stop()
     recognizerStream.removeListener('data', _processInput)
-    //mic.unpipe(recognizerStream)
     recognizerStream = undefined
   }
 
@@ -98,6 +97,8 @@ function recordingState() {
       lights[0].on(1200)
     } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S' || data === 'LETS') {
       toggleLight(lights[0], 800)
+    } else {
+      tts('I don\'t understand. Please try again.')
     }
   }
 
