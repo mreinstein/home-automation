@@ -1,12 +1,12 @@
 'use strict'
 
-const Detector = require('snowboy').Detector
-const Models   = require('snowboy').Models
+//const Detector = require('snowboy').Detector
+//const Models   = require('snowboy').Models
 const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
 const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
-//const snowboy  = require('./lib/snowboy')
+const snowboy  = require('./lib/snowboy')
 const state    = require('./lib/finite-state-machine')
 const tts      = require('./lib/tts')
 
@@ -49,6 +49,7 @@ function toggleLight(light, duration=0) {
 function idleState() {
   let mic
 
+  /*
   const detector = new Detector({
     resource: __dirname + '/resources/common.res',
     models: models,
@@ -56,6 +57,7 @@ function idleState() {
     // audioGain controls whether to increase (>1) or decrease (<1) input volume.
     audioGain: 1.0
   })
+  */
 
   detector.on('error', function (er) {
     console.log('snowboy error', er)
@@ -168,6 +170,8 @@ function recordingState() {
 
 // playing a shoutcast station
 //mpg123 -C http://206.190.150.90:8301/stream
+
+/*
 const models = new Models()
 
 models.add({
@@ -186,6 +190,9 @@ models.add({
   sensitivity: '0.5',
   hotwords : 'stanley'
 })
+*/
+
+const detector = snowboy()
 
 
 const off_commands = [

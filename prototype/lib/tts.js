@@ -40,7 +40,7 @@ module.exports = async function tts(text) {
     https.get(ttsURL, function(res) {
       const speaker = new Speaker({
         channels: 1,
-        bitDepth: 16,         // 16-bit samples
+        bitDepth: 16,
         sampleRate: 16000,
         signed: true
       })
@@ -48,7 +48,7 @@ module.exports = async function tts(text) {
       speaker.on('close', function() {
         resolve()
       })
-      //fs.createReadStream(__dirname + '/resources/1.wav').pipe(speaker)
+      //fs.createReadStream(__dirname + '/../resources/1.wav').pipe(speaker)
       res.pipe(speaker)
     })
   })
