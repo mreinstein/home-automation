@@ -13,7 +13,7 @@ function idleState() {
   let detector
 
   let enter = async function() {
-    await sleep(100)
+    await sleep(500)
 
     detector = snowboy()
 
