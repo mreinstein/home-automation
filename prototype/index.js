@@ -155,7 +155,7 @@ function listeningState() {
     fsm.setState('RECORDING')
   }
 
-  return Object.freeze({ enter, exit })
+  return Object.freeze({ enter })
 }
 
 
