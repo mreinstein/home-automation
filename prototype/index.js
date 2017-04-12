@@ -12,16 +12,24 @@ const tts      = require('./lib/tts')
 function idleState() {
   //let mic
 
-  detector.on('error', function (er) {
-    console.log('snowboy error', er)
-  })
+  let detector
 
-  detector.on('hotword', async function(index, hotword) {
-    console.log('hotword', index, hotword)
-    fsm.setState('LISTENING')
-  })
+  let enter = async function() {
+    await sleep(500)
 
-  let enter = function() {
+    console.log('ready from nap. lets rock!')
+    detector = snowboy()
+
+    /*
+    detector.on('error', function (er) {
+      console.log('snowboy error', er)
+    })*/
+
+    detector.on('hotword', async function(index, hotword) {
+      console.log('hotword', index, hotword)
+      fsm.setState('LISTENING')
+    })
+
     record.start({
       threshold: 0,
       verbose: true
@@ -161,8 +169,6 @@ function listeningState() {
 
 // playing a shoutcast station
 //mpg123 -C http://206.190.150.90:8301/stream
-
-const detector = snowboy()
 
 
 const off_commands = [
