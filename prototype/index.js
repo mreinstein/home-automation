@@ -97,8 +97,6 @@ function recordingState() {
       lights[0].on(1200)
     } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S' || data === 'LETS') {
       toggleLight(lights[0], 800)
-    } else {
-      tts('I don\'t understand. Please try again.')
     }
   }
 
