@@ -6,6 +6,7 @@ const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
 const lifx     = require('node-lifx').Client
 const record   = require('node-record-lpcm16')
+//const snowboy  = require('./lib/snowboy')
 const state    = require('./lib/finite-state-machine')
 const tts      = require('./lib/tts')
 
@@ -47,7 +48,7 @@ function toggleLight(light, duration=0) {
 
 function idleState() {
   let mic
-  
+
   const detector = new Detector({
     resource: __dirname + '/resources/common.res',
     models: models,
@@ -125,7 +126,7 @@ function recordingState() {
 
       fsm.setState('IDLE')
     })
-    
+
     recognizerStream.on('data', _processInput)
     mic.pipe(recognizerStream)
   }
@@ -175,7 +176,7 @@ models.add({
   // Detection sensitivity controls how sensitive the detection is.
   // It is a value between 0 and 1. Increasing the sensitivity value
   // leads to better detection rate, but also higher false alarm rate.
-  // It is an important parameter that you should play with in your 
+  // It is an important parameter that you should play with in your
   sensitivity: '0.5',
   hotwords : 'stanley'
 })
@@ -206,8 +207,8 @@ const morning_commands = [
   'MORNING'
 ]
 
-let lights = []
-let client = new lifx()
+const lights = []
+const client = new lifx()
 
 client.on('light-new', function(light) {
   lights.push(light)

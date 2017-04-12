@@ -23,7 +23,7 @@ function getPollyTTSURL(text) {
   // https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
   return polly.getSynthesizeSpeechUrl({
     OutputFormat: 'pcm', // mp3, pcm
-    
+
     // Valid values for pcm are "8000" and "16000" The default value is "16000"
     // 22050 for mp3
     SampleRate: '16000',
@@ -40,17 +40,16 @@ module.exports = async function tts(text) {
     https.get(ttsURL, function(res) {
       const speaker = new Speaker({
         channels: 1,
-        bitDepth: 16,         // 16-bit samples 
+        bitDepth: 16,         // 16-bit samples
         sampleRate: 16000,
         signed: true
       })
 
-      //fs.createReadStream(__dirname + '/resources/1.wav').pipe(speaker)
-      res.pipe(speaker)
-
       speaker.on('close', function() {
         resolve()
       })
+      //fs.createReadStream(__dirname + '/resources/1.wav').pipe(speaker)
+      res.pipe(speaker)
     })
   })
 }
