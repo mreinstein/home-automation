@@ -35,6 +35,12 @@ https://melgrubb.com/2016/12/11/rphs-v2-introduction/
 I don't use all of the above. it's too much crap for one machine. I follow most of steps 2, 3, 6, 14
 
 
+## music recognition
+
+* https://github.com/spotify/echoprint-codegen
+* https://github.com/worldveil/dejavu
+
+
 ## LIFX lighting
 
 * https://github.com/magicmonkey/lifxjs
@@ -49,7 +55,7 @@ I haven't tried these yet but they might be worth pursuing.
 
 ### send audio over network with netcat and sox
 It might be better to buy a more powerful machine than raspberry pi which is dedicated to speech recognition.
-The idea is the raspberry pi nodes become simple streaming microphones which pass the data along to a processing node. 
+The idea is the raspberry pi nodes become simple streaming microphones which pass the data along to a processing node.
 
 * https://ubuntuforums.org/archive/index.php/t-2037923.html
 * http://www.linuxquestions.org/questions/slackware-14/send-audio-over-network-888169/
