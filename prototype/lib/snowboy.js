@@ -15,15 +15,18 @@ module.exports = function snowboy() {
     // It is a value between 0 and 1. Increasing the sensitivity value
     // leads to better detection rate, but also higher false alarm rate.
     // It is an important parameter that you should play with in your
-    sensitivity: '0.5',
+    sensitivity: '0.4',
     hotwords : 'stanley'
   })
 
+  // TODO: update her model based on new audio recordings
+  /*
   models.add({
     file: __dirname + '/../resources/stanley-heather-pi.pmdl',
     sensitivity: '0.5',
     hotwords : 'stanley'
   })
+  */
 
   return new Detector({
     resource: __dirname + '/../resources/common.res',
