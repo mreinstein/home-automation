@@ -22,7 +22,7 @@ http.createServer(function (req, res) {
 
   const filePath = path.resolve(mediaPath, pathname.substring(1))
 
-  if (!fs.existsSync()) {
+  if (!fs.existsSync(filePath)) {
     res.writeHead(404)
     res.end('file not found')
     return
