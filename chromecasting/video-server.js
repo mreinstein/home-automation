@@ -6,7 +6,7 @@
 const http = require('http'),
     fs = require('fs'),
     mime = require('mime'),
-    path = require('path')
+    path = require('path'),
     rangeParser = require('range-parser'),
     url = require('url')
     util = require('util')
