@@ -11,7 +11,9 @@ node ./cast.js
 ```
 
 
-## converting a movie file format:
+## command line snippets
+
+### converting a movie file format:
 
 ffmpeg needs aac installed:
 ```bash
@@ -20,6 +22,14 @@ brew install ffmpeg --with-fdk-aac
 
 ```
 ffmpeg -i movie.avi movie.mp4
+```
+
+### copying files to a raspberry pi
+
+be sure to set up passwordless login (pem login.) Then:
+
+```bash
+scp *.mp4 pi@<local ip address>:media/
 ```
 
 
