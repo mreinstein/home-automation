@@ -8,7 +8,7 @@ const http = require('http'),
     mime = require('mime'),
     path = require('path'),
     rangeParser = require('range-parser'),
-    url = require('url')
+    url = require('url'),
     util = require('util')
 
 
