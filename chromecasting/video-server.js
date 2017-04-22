@@ -20,7 +20,9 @@ http.createServer(function (req, res) {
   // https://nodejs.org/dist/latest-v7.x/docs/api/http.html#http_message_url
   const { pathname } = url.parse(req.url)
 
-  const filePath = path.resolve(mediaPath, pathname)
+  const filePath = path.resolve(mediaPath, pathname.substring(1))
+
+  console.log('file to play:', filePath)
   const stat = fs.statSync(filePath)
   const total = stat.size
   const type = mime.lookup(filePath) // 'video/mp4'
