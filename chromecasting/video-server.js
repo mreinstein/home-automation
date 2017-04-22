@@ -27,8 +27,16 @@ http.createServer(function (req, res) {
     res.end('file not found')
     return
   }
+
   console.log('file to play:', filePath)
   const stat = fs.statSync(filePath)
+
+  console.log('stat:', stat)
+  if(stat.type !== 'file') {
+    res.writeHead(404)
+    res.end('file not found')
+    return
+  }
   const total = stat.size
   const type = mime.lookup(filePath) // 'video/mp4'
 
