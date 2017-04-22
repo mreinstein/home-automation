@@ -12,6 +12,7 @@ sudo apt-get upgrade
 
 npm install
 
+mkdir ~/media
 
 # configure the voice interaction agent to run automatically at boot, restart on failure
 sudo cp home-video.service /lib/systemd/system/

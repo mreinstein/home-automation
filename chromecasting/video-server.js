@@ -13,13 +13,14 @@ const http = require('http'),
 
 
 const port = 8000
+const mediaPath = '/home/pi/media'
 
 http.createServer(function (req, res) {
   // TODO: sanitize req.url to avoid exposing operating system
   // https://nodejs.org/dist/latest-v7.x/docs/api/http.html#http_message_url
   const { pathname } = url.parse(req.url)
 
-  const filePath = path.resolve(__dirname, pathname)
+  const filePath = path.resolve(mediaPath, pathname)
   const stat = fs.statSync(filePath)
   const total = stat.size
   const type = mime.lookup(filePath) // 'video/mp4'
