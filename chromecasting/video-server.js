@@ -24,7 +24,7 @@ http.createServer(function (req, res) {
 
   if (!fs.existsSync()) {
     res.writeHead(404)
-    res.send('file not found')
+    res.end('file not found')
     return
   }
   console.log('file to play:', filePath)
