@@ -22,6 +22,11 @@ http.createServer(function (req, res) {
 
   const filePath = path.resolve(mediaPath, pathname.substring(1))
 
+  if (!fs.existsSync()) {
+    res.writeHead(404)
+    res.send('file not found')
+    return
+  }
   console.log('file to play:', filePath)
   const stat = fs.statSync(filePath)
   const total = stat.size
