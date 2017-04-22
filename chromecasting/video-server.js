@@ -1,22 +1,28 @@
 'use strict'
 
-/*
- * Inspired by: http://stackoverflow.com/questions/4360060/video-streaming-with-html-5-via-node-js
- */
+// exposes an http streaming video server
+// Inspired by http://stackoverflow.com/questions/4360060/video-streaming-with-html-5-via-node-js
 
 const http = require('http'),
     fs = require('fs'),
     mime = require('mime'),
+    path = require('path')
     rangeParser = require('range-parser'),
+    url = require('url')
     util = require('util')
 
 
+const port = 8000
+
 http.createServer(function (req, res) {
-  const filePath = __dirname + '/La-La-Land.mp4'
-  //var filePath = '/Users/michaelreinstein/Movies/raw/title00.mkv'
+  // TODO: sanitize req.url to avoid exposing operating system
+  // https://nodejs.org/dist/latest-v7.x/docs/api/http.html#http_message_url
+  const { pathname } = url.parse(req.url)
+
+  const filePath = path.resolve(__dirname, pathname)
   const stat = fs.statSync(filePath)
   const total = stat.size
-  const type = mime.lookup(filePath)
+  const type = mime.lookup(filePath) // 'video/mp4'
 
   if (req.headers['range']) {
     const part = rangeParser(total, req.headers.range)[0]
@@ -24,7 +30,7 @@ http.createServer(function (req, res) {
     const chunksize = (part.end - part.start) + 1
 
     console.log('RANGE: ' + part.start + ' - ' + part.end + ' = ' + chunksize)
-    
+
     const file = fs.createReadStream(filePath, {start: part.start, end: part.end})
 
     res.writeHead(206, {
@@ -38,8 +44,8 @@ http.createServer(function (req, res) {
     file.pipe(res)
   } else {
     console.log('ALL: ' + total)
-    res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'video/mp4' })
+    res.writeHead(200, { 'Content-Length': total, 'Content-Type': type })
     fs.createReadStream(filePath).pipe(res)
   }
-}).listen(8000)
-console.log('Server running at http://127.0.0.1:8000/')
+}).listen(port)
+console.log(`Streaming video server running at http://127.0.0.1:${port}`)
