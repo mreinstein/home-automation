@@ -1,7 +1,8 @@
 {
   "name": "chromecasting",
   "version": "0.0.1",
-  "description": "## serve a movie ```bash node ./video-server.js ```",
+  "description": "simplistic home video streaming",
+  "private": true,
   "main": "test.js",
   "dependencies": {
     "castnow": "^0.4.18",

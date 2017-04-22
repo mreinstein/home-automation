@@ -10,10 +10,10 @@ browser.on('deviceOn', function (device) {
   //const urlMedia = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4'
 
   // streaming from the local media server
-  const urlMedia = 'http://192.168.42.66:8000/La-La-Land.mp4'
+  const urlMedia = 'http://192.168.42.74:8000/superman.mp4'
 
   device.play(urlMedia, 0, function() {
-    console.log('Playing in your chromecast')
+    console.log(`casting ${urlMedia}`)
 
     /*
     setTimeout(function () {
