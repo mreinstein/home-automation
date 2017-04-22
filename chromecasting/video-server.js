@@ -31,8 +31,7 @@ http.createServer(function (req, res) {
   console.log('file to play:', filePath)
   const stat = fs.statSync(filePath)
 
-  console.log('stat:', stat)
-  if(stat.type !== 'file') {
+  if(!stat.isFile()) {
     res.writeHead(404)
     res.end('file not found')
     return
