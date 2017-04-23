@@ -2,7 +2,6 @@
 Notes, links, and prototypes related to my home automation system experiments.
 
 ```
-|- chromecasting/
 |- prototype/
 |- sphinx-prototype/
 |- asound.conf
@@ -69,4 +68,3 @@ lucida is marketing itself as an open source siri. it includes a speech recognit
 which I've heard from a few places is more accurate than CMU sphinx.
 
 https://github.com/claritylab/lucida/tree/master/lucida/speechrecognition
-
