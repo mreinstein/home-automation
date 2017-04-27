@@ -97,7 +97,7 @@ function recordingState() {
 
     if(lights.length === 0) return
 
-    if(data.indexOf('EVENING LIGHT') > -1) {
+    if(isCommand(data, [ 'EVENING LIGHT', 'SOFT LIGHT'] )) {
       setColor(lights[0], 29, 100, 50, 3500, 1000)
     } else if(data.indexOf('READING LIGHT') > -1) {
       setColor(lights[0], 0, 0, 65, 2500, 1000)
@@ -110,6 +110,8 @@ function recordingState() {
       lights[0].on(1200)
     } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S' || data === 'LETS') {
       toggleLight(lights[0], 800)
+    } else if (data === 'I LOVE YOU') {
+      tts('I love you too, darling!')
     }
   }
 
