@@ -104,11 +104,10 @@ function recordingState() {
     } else if(isCommand(data, morning_commands)) {
       setColor(lights[0], 202, 100, 40, 3500, 60000)
     } else if(isCommand(data, off_commands)) {
-      console.log('lights off')
       lights[0].off(600)
     } else if (isCommand(data, on_commands)) {
       lights[0].on(1200)
-    } else if(data === 'LIGHT' || data === 'LIGHTS' || data === 'LET\'S' || data === 'LETS') {
+    } else if(isCommand(data, [ 'LIGHT', 'LIGHTS', 'LET\'S', 'LETS', 'PLATES' ] )) {
       toggleLight(lights[0], 800)
     } else if (data === 'I LOVE YOU') {
       tts('I love you too, darling!')
@@ -211,7 +210,7 @@ function awaitingMicrophoneState() {
         available = true
       } catch(err) { }
 
-      await sleep(2000)
+      await sleep(1000)
     }
 
     fsm.setState('IDLE')
