@@ -33,9 +33,7 @@ function idleState() {
       verbose: false
     })
     .on('error', function(error) {
-      console.error('error in idle:', error)
-      if(error.toLowerCase().trim().indexOf('warn') < 0) {
-        // this was not a warning, the record stream failed
+      if(isMicrophoneError(error)) {
         fsm.setState('AWAITING-MICROPHONE')
       }
     })
@@ -78,8 +76,7 @@ function recordingState() {
       verbose: false
     })
     .on('error', function(error) {
-      if(error.toLowerCase().trim().indexOf('warn') < 0) {
-        // this was not a warning, the record stream failed
+      if(isMicrophoneError(error)) {
         fsm.setState('AWAITING-MICROPHONE')
       }
     })
@@ -174,6 +171,16 @@ function listeningState() {
 }
 
 
+// determine if stderror output from sox or arecord are real errors
+// and not simply a harmless warning
+function isMicrophoneError(error) {
+  // for example, sox prints this to stderr, but it's just a warning:
+  // rec WARN wav: Length in output .wav header will be wrong since can't seek to fix it
+  return error.toLowerCase().indexOf('fail') >= 0 ||
+    error.toLowerCase().indexOf('error') >= 0
+}
+
+
 function awaitingMicrophoneState() {
   let _acquireMicrophone = async function() {
     return new Promise(function(resolve, reject) {
@@ -182,8 +189,7 @@ function awaitingMicrophoneState() {
         verbose: false
       })
       .on('error', function(error) {
-        if(error.toLowerCase().trim().indexOf('warn') < 0) {
-          // this was not a warning, the record stream failed
+        if(isMicrophoneError(error)) {
           reject(error)
         }
       })
