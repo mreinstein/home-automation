@@ -30,7 +30,15 @@ function idleState() {
     record.start({
       threshold: 0,
       verbose: false
-    }).pipe(detector)
+    })
+    .on('error', function(error) {
+      if(error.toLowerCase().trim().indexOf('warn') < 0) {
+        // this was not a warning, the record stream failed
+        console.error('ERROR: record failed. error:', error)
+        fsm.setState('AWAITING-MICROPHONE')
+      }
+    })
+    .pipe(detector)
   }
 
   let exit = function() {
@@ -53,7 +61,7 @@ function recordingState() {
     recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 2 })
 
     recognizerStream.on('error', function(event) {
-      //console.log('er', event)
+      //console.error('er', event)
     })
 
     recognizerStream.on('close', async function(event) {
@@ -67,7 +75,15 @@ function recordingState() {
     record.start({
       threshold: 0,
       verbose: false
-    }).pipe(recognizerStream)
+    })
+    .on('error', function(error) {
+      if(error.toLowerCase().trim().indexOf('warn') < 0) {
+        // this was not a warning, the record stream failed
+        console.error('ERROR: record failed. error:', error)
+        fsm.setState('AWAITING-MICROPHONE')
+      }
+    })
+    .pipe(recognizerStream)
   }
 
   let exit = function() {
@@ -146,7 +162,7 @@ function toggleLight(light, duration=0) {
 
 
 function listeningState() {
-  const choices = [ 'acknowledged', 'at your service', 'Hiya', 'Yes?' ]
+  const choices = [ 'Acknowledged.', 'At your service.', 'Hiya.', 'Yes?' ]
 
   let enter = async function() {
     const conf = choices[Math.floor(Math.random() * choices.length)]
@@ -156,6 +172,47 @@ function listeningState() {
 
   return Object.freeze({ enter })
 }
+
+
+function awaitingMicrophoneState() {
+  let _acquireMicrophone = async function() {
+    return new Promise(function(resolve, reject) {
+      record.start({
+        threshold: 0,
+        verbose: false
+      })
+      .on('error', function(error) {
+        console.log('got errrrrr', error)
+        if(error.toLowerCase().trim().indexOf('warn') < 0) {
+          // this was not a warning, the record stream failed
+          console.error('ERROR: record failed. error:', error)
+          reject(error)
+        }
+      })
+      .on('open', function() {
+        console.log('yep its open now?')
+        record.stop()
+        resolve()
+      })
+    })
+  }
+
+  // poll until microphone becomes available
+  let enter = async function() {
+    let available = false
+    while(!available) {
+      try {
+        available = await _acquireMicrophone()
+      } catch(err) { }
+
+      await sleep(2000)
+    }
+    fsm.setState('IDLE')
+  }
+
+  return Object.freeze({ enter })
+}
+
 
 
 // playing a shoutcast station
@@ -193,8 +250,9 @@ client.init()
 
 
 const fsm = state()
+fsm.addState('AWAITING-MICROPHONE', awaitingMicrophoneState())
 fsm.addState('IDLE', idleState())
 fsm.addState('LISTENING', listeningState())
 fsm.addState('RECORDING', recordingState())
 
-fsm.setState('IDLE')
+fsm.setState('AWAITING-MICROPHONE')

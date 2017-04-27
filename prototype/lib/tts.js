@@ -24,8 +24,8 @@ function getPollyTTSURL(text) {
   return polly.getSynthesizeSpeechUrl({
     OutputFormat: 'pcm', // mp3, pcm
 
-    // Valid values for pcm are "8000" and "16000" The default value is "16000"
-    // 22050 for mp3
+    // Valid values for pcm are '8000' and '16000' The default value is '16000'
+    // The default value is '22050' for mp3
     SampleRate: '16000',
 
     Text: text,
