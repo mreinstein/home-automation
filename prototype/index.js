@@ -35,7 +35,6 @@ function idleState() {
     .on('error', function(error) {
       if(error.toLowerCase().trim().indexOf('warn') < 0) {
         // this was not a warning, the record stream failed
-        console.error('ERROR: record failed. error:', error)
         fsm.setState('AWAITING-MICROPHONE')
       }
     })
@@ -80,7 +79,6 @@ function recordingState() {
     .on('error', function(error) {
       if(error.toLowerCase().trim().indexOf('warn') < 0) {
         // this was not a warning, the record stream failed
-        console.error('ERROR: record failed. error:', error)
         fsm.setState('AWAITING-MICROPHONE')
       }
     })
@@ -185,7 +183,6 @@ function awaitingMicrophoneState() {
       .on('error', function(error) {
         if(error.toLowerCase().trim().indexOf('warn') < 0) {
           // this was not a warning, the record stream failed
-          console.error('ERROR: record failed. error:', error)
           reject(error)
         }
       })
