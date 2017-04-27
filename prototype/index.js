@@ -13,7 +13,6 @@ function idleState() {
   let detector
 
   let enter = async function() {
-    await sleep(500)
 
     detector = snowboy()
 
@@ -26,6 +25,8 @@ function idleState() {
       console.log('hotword', index, hotword)
       await fsm.setState('LISTENING')
     })
+
+    await sleep(500)
 
     record.start({
       threshold: 0,
@@ -182,15 +183,13 @@ function awaitingMicrophoneState() {
         verbose: false
       })
       .on('error', function(error) {
-        console.log('got errrrrr', error)
         if(error.toLowerCase().trim().indexOf('warn') < 0) {
           // this was not a warning, the record stream failed
           console.error('ERROR: record failed. error:', error)
           reject(error)
         }
       })
-      .on('open', function() {
-        console.log('yep its open now?')
+      .on('readable', function() {
         record.stop()
         resolve()
       })
@@ -202,7 +201,8 @@ function awaitingMicrophoneState() {
     let available = false
     while(!available) {
       try {
-        available = await _acquireMicrophone()
+        await _acquireMicrophone()
+        available = true
       } catch(err) { }
 
       await sleep(2000)
