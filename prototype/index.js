@@ -33,6 +33,7 @@ function idleState() {
       verbose: false
     })
     .on('error', function(error) {
+      console.error('error in idle:', error)
       if(error.toLowerCase().trim().indexOf('warn') < 0) {
         // this was not a warning, the record stream failed
         fsm.setState('AWAITING-MICROPHONE')
@@ -204,6 +205,7 @@ function awaitingMicrophoneState() {
 
       await sleep(2000)
     }
+
     fsm.setState('IDLE')
   }
 
