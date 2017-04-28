@@ -110,7 +110,7 @@ function recordingState() {
     } else if(isCommand(data, [ 'LIGHT', 'LIGHTS', 'LET\'S', 'LETS', 'PLATES' ] )) {
       toggleLight(lights[0], 800)
     } else if (data === 'I LOVE YOU') {
-      tts('I love you too, darling!')
+      tts('I love you too!')
     }
   }
 
