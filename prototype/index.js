@@ -125,7 +125,7 @@ function recordingState() {
       if(data.indexOf('CANCEL') >= 0) {
         cancelNap()
       } else {
-        take20MinuteNap()
+        await take20MinuteNap()
       }
     }
   }
@@ -236,17 +236,17 @@ function awaitingMicrophoneState() {
 }
 
 
-function take20MinuteNap() {
+async function take20MinuteNap() {
   if(napTimer) {
     // nap is already set
     return
   }
-  tts('Okay, I will wake you up in twenty minutes')
+  await tts('Okay, I will wake you up in twenty minutes')
 
   napTimer = setTimeout(function() {
-    tts('It\'s time to wake up now. Rise and shine!')
+    tts(`It's ${moment().format('h:mm a')}. Time to wake up! Rise and shine, up and at 'em`)
     napTimer = undefined
-  }, 20 * 60 * 10000)
+  }, 20 * 60 * 1000)
 }
 
 function cancelNap() {
