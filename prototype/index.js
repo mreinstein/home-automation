@@ -121,6 +121,12 @@ function recordingState() {
       tts(moment().format('dddd, MMMM Do'))  //dddd, MMMM Do YYYY
     } else if (data.indexOf('WEATHER') >= 0) {
       tts(await weather({ postal: process.env.POSTAL_CODE }))
+    } else if(data.indexOf('NAP') >= 0) {
+      if(data.indexOf('CANCEL') >= 0) {
+        cancelNap()
+      } else {
+        take20MinuteNap()
+      }
     }
   }
 
@@ -230,6 +236,30 @@ function awaitingMicrophoneState() {
 }
 
 
+function take20MinuteNap() {
+  if(napTimer) {
+    // nap is already set
+    return
+  }
+  tts('Okay, I will wake you up in twenty minutes')
+
+  napTimer = setTimeout(function() {
+    tts('It\'s time to wake up now. Rise and shine!')
+    napTimer = undefined
+  }, 20 * 60 * 10000)
+}
+
+function cancelNap() {
+  if(!napTimer) {
+    return
+  }
+
+  clearTimeout(napTimer)
+  napTimer = undefined
+  tts('The nap has been cancelled.')
+}
+
+
 
 // playing a shoutcast station
 //mpg123 -C http://206.190.150.90:8301/stream
@@ -264,6 +294,7 @@ client.on('light-new', function(light) {
 
 client.init()
 
+let napTimer
 
 const fsm = state()
 fsm.addState('AWAITING-MICROPHONE', awaitingMicrophoneState())
