@@ -8,6 +8,7 @@ const record   = require('node-record-lpcm16')
 const snowboy  = require('./lib/snowboy')
 const state    = require('./lib/async-finite-state-machine')
 const tts      = require('./lib/tts')
+const weather  = require('./lib/weather')
 
 
 function idleState() {
@@ -118,6 +119,8 @@ function recordingState() {
       tts("It's " + moment().format('h:mm a'))
     } else if (isCommand(data, ['WHAT IS THE DATE', 'WHAT\'S THE DATE'])) {
       tts(moment().format('dddd, MMMM Do YYYY'))
+    } else if (data.indexOf('WEATHER') >= 0) {
+      tts(weather({ postal: process.env.POSTAL_CODE }))
     }
   }
 
