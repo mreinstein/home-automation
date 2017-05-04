@@ -118,7 +118,7 @@ function recordingState() {
     } else if (isCommand(data, [ 'WHAT\'S THE TIME', 'WHAT TIME IS IT' ])) {
       tts("It's " + moment().format('h:mm a'))
     } else if (isCommand(data, ['WHAT IS THE DATE', 'WHAT\'S THE DATE'])) {
-      tts(moment().format('dddd, MMMM Do YYYY'))
+      tts(moment().format('dddd, MMMM Do'))  //dddd, MMMM Do YYYY
     } else if (data.indexOf('WEATHER') >= 0) {
       tts(await weather({ postal: process.env.POSTAL_CODE }))
     }
