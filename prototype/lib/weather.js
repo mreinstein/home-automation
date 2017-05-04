@@ -129,7 +129,7 @@ be sure to cover up.`
 SPF 30+ sunscreen and sunglasses are also recommended.`
   } else if ((uvIndex >= 8) && (uvIndex <= 10.9)) { // Very High
     uvText = ` The UV index is very high today!  Be sure to wear sun protective clothing \
-and SPF 30+ sunscreen.  Don't stay in the sun for too long if you can help it.`
+and SPF 30 plus sunscreen.`
   } else if (uvIndex >= 11) { // Extreme
     uvText = ` The UV index is extreme today!  Be sure to take all precautions. \
 Wear SPF 30+ sunscreen, a long-sleeved shirt, pants, sunglasses, and a very broad hat. \
