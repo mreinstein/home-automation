@@ -3,6 +3,7 @@
 const STT      = require('watson-developer-cloud/speech-to-text/v1')
 const dotenv   = require('dotenv').config()
 const lifx     = require('node-lifx').Client
+const moment   = require('moment')
 const record   = require('node-record-lpcm16')
 const snowboy  = require('./lib/snowboy')
 const state    = require('./lib/async-finite-state-machine')
@@ -111,6 +112,12 @@ function recordingState() {
       toggleLight(lights[0], 800)
     } else if (data === 'I LOVE YOU') {
       tts('I love you too!')
+    } else if (isCommand(data, [ 'WHAT IS TODAY', 'WHAT DAY IS IT' ])) {
+      tts('Today is ' + moment().format('dddd, MMMM Do'))
+    } else if (data === 'WHAT TIME IS IT') {
+      tts("It's " + moment().format('h:mm a'))
+    } else if (data === 'WHAT IS THE DATE') {
+      tts(moment().format('dddd, MMMM Do YYYY'))
     }
   }
 
