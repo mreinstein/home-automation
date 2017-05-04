@@ -24,13 +24,6 @@ function _getReport(postal, useMetric) {
         return reject('weather service unavailable')
       }
 
-
-      // look at docs/example-vendor-responses/weather.md for a full response body
-      if (__guard__(body != null ? body.response : undefined, x => x.error)) {
-        er = body.response.error.type.toLowerCase()
-        return reject(er)
-      }
-
       // TODO: pull air quality from aqicn
       //  https://www.npmjs.com/package/aqicn
       //  http://aqicn.org/search/#q=Long Beach, CA

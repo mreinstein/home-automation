@@ -91,7 +91,7 @@ function recordingState() {
     recognizerStream = undefined
   }
 
-  let _processInput = function(data) {
+  let _processInput = async function(data) {
     data = data.toString().trim().toUpperCase()
     if(data.length === 0) return
 
@@ -120,7 +120,7 @@ function recordingState() {
     } else if (isCommand(data, ['WHAT IS THE DATE', 'WHAT\'S THE DATE'])) {
       tts(moment().format('dddd, MMMM Do YYYY'))
     } else if (data.indexOf('WEATHER') >= 0) {
-      tts(weather({ postal: process.env.POSTAL_CODE }))
+      tts(await weather({ postal: process.env.POSTAL_CODE }))
     }
   }
 
