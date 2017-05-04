@@ -132,8 +132,7 @@ SPF 30+ sunscreen and sunglasses are also recommended.`
 and SPF 30 plus sunscreen.`
   } else if (uvIndex >= 11) { // Extreme
     uvText = ` The UV index is extreme today!  Be sure to take all precautions. \
-Wear SPF 30+ sunscreen, a long-sleeved shirt, pants, sunglasses, and a very broad hat. \
-Try and avoid exposure to the sun as much as possible.`
+Wear SPF 30+ sunscreen, a long-sleeved shirt, pants, sunglasses, and a very broad hat.`
   }
   return uvText
 }
