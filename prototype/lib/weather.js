@@ -11,7 +11,7 @@ function _getReport(postal, useMetric) {
   const opts = {
     url: `http://api.wunderground.com${path}`,
     json: true,
-    timeout: config.httpRequestTimeout
+    timeout: 1000
   }
 
   return new Promise(function(resolve, reject) {
