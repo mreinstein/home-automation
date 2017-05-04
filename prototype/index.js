@@ -112,11 +112,11 @@ function recordingState() {
       toggleLight(lights[0], 800)
     } else if (data === 'I LOVE YOU') {
       tts('I love you too!')
-    } else if (isCommand(data, [ 'WHAT IS TODAY', 'WHAT DAY IS IT' ])) {
+    } else if (isCommand(data, [ 'WHAT\'S TODAY', 'WHAT IS TODAY', 'WHAT DAY IS IT' ])) {
       tts('Today is ' + moment().format('dddd, MMMM Do'))
-    } else if (data === 'WHAT TIME IS IT') {
+    } else if (isCommand(data, [ 'WHAT\'S THE TIME', 'WHAT TIME IS IT' ])) {
       tts("It's " + moment().format('h:mm a'))
-    } else if (data === 'WHAT IS THE DATE') {
+    } else if (isCommand(data, ['WHAT IS THE DATE', 'WHAT\'S THE DATE'])) {
       tts(moment().format('dddd, MMMM Do YYYY'))
     }
   }

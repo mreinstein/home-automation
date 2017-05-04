@@ -30,6 +30,9 @@ sudo systemctl enable home-automation.service
 sudo systemctl start home-automation.service
 
 
+# set up the correct timezone
+sudo dpkg-reconfigure tzdata
+
 # set up unattended-upgrades
 sudo apt-get install unattended-upgrades apt-listchanges bsd-mailx -y
 
