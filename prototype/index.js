@@ -249,6 +249,7 @@ async function take20MinuteNap() {
   }, 20 * 60 * 1000)
 }
 
+
 function cancelNap() {
   if(!napTimer) {
     return
@@ -258,7 +259,6 @@ function cancelNap() {
   napTimer = undefined
   tts('The nap has been cancelled.')
 }
-
 
 
 // playing a shoutcast station
