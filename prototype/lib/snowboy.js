@@ -20,7 +20,7 @@ module.exports = function snowboy() {
   })
 
   models.add({
-    file: __dirname + '/../resources/stanley-heather-pi-2.pmdl',
+    file: __dirname + '/../resources/stanley-heather-pi2.pmdl',
     sensitivity: '0.38',
     hotwords : 'stanley'
   })
