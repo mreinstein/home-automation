@@ -59,7 +59,7 @@ function recordingState() {
   })
 
   let enter = async function() {
-    recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', continuous: true, inactivity_timeout: 2 })
+    recognizerStream = speech_to_text.createRecognizeStream({ content_type: 'audio/l16; rate=16000', inactivity_timeout: 2 })
 
     recognizerStream.on('error', function(event) {
       //console.error('er', event)
