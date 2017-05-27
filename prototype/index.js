@@ -1,14 +1,14 @@
 'use strict'
 
-const STT      = require('watson-developer-cloud/speech-to-text/v1')
-const dotenv   = require('dotenv').config()
-const lifx     = require('node-lifx').Client
-const moment   = require('moment')
-const record   = require('node-record-lpcm16')
-const snowboy  = require('./lib/snowboy')
-const state    = require('./lib/async-finite-state-machine')
-const tts      = require('./lib/tts')
-const weather  = require('./lib/weather')
+const STT     = require('watson-developer-cloud/speech-to-text/v1')
+const dotenv  = require('dotenv').config()
+const lifx    = require('node-lifx').Client
+const moment  = require('moment')
+const record  = require('node-record-lpcm16')
+const snowboy = require('./lib/snowboy')
+const state   = require('./lib/async-finite-state-machine')
+const tts     = require('./lib/tts')
+const weather = require('./lib/weather')
 
 
 function idleState() {
