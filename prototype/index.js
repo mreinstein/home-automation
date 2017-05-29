@@ -122,7 +122,7 @@ function recordingState() {
     } else if (data.indexOf('WEATHER') >= 0) {
       tts(await weather({ postal: process.env.POSTAL_CODE }))
     } else if(data.indexOf('NAP') >= 0) {
-      if(data.indexOf('CANCEL') >= 0) {
+      if(data.indexOf('CANCEL') >= 0 || data.indexOf('FORGET') >= 0) {
         cancelNap()
       } else {
         await take20MinuteNap()
@@ -241,10 +241,10 @@ async function take20MinuteNap() {
     // nap is already set
     return
   }
-  await tts('Okay, I will wake you up in twenty minutes')
+  await tts('Okay, I\'ll wake you up in twenty minutes.')
 
   napTimer = setTimeout(function() {
-    tts(`It's ${moment().format('h:mm a')}. Time to wake up! Rise and shine, up and at 'em`)
+    tts(`It's ${moment().format('h:mm a')}. Time to wake up! Rise and shine, up and atom.`)
     napTimer = undefined
   }, 20 * 60 * 1000)
 }
