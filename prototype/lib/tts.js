@@ -13,30 +13,33 @@ const polly = new Polly({
 })
 
 
-function getPollyTTSURL(text) {
+// @param string OutputFormat   should be mp3 or pcm. defaults to mp3
+function getPollyTTSURL(Text, OutputFormat) {
+  if(OutputFormat !== 'pcm')
+    OutputFormat = 'mp3'
+
+  // Valid values for pcm are '8000' and '16000' The default value is '16000'
+  // The default value is '22050' for mp3
+  const SampleRate = (OutputFormat === 'mp3') ? '22050' : '16000'
   const halfHourInSeconds = 30 * 60
-  const pollyVoice = getVoiceName()
+  const TextType = Text.indexOf('<speak>') < 0 ? 'text' : 'ssml'
 
   // http://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
 
   // pcm is in signed 16-bit, 1 channel (mono), little-endian format
   // https://github.com/aws/aws-sdk-js/blob/master/clients/polly.d.ts#L237
   return polly.getSynthesizeSpeechUrl({
-    OutputFormat: 'pcm', // mp3, pcm
-
-    // Valid values for pcm are '8000' and '16000' The default value is '16000'
-    // The default value is '22050' for mp3
-    SampleRate: '16000',
-
-    Text: text,
-    VoiceId: pollyVoice
+    OutputFormat,
+    SampleRate,
+    Text,
+    VoiceId: getVoiceName()
   }, halfHourInSeconds)
 }
 
 
 module.exports = async function tts(text) {
   return new Promise(function(resolve, reject) {
-    let ttsURL = getPollyTTSURL(text)
+    let ttsURL = getPollyTTSURL(text, 'pcm')
     https.get(ttsURL, function(res) {
       const speaker = new Speaker({
         channels: 1,

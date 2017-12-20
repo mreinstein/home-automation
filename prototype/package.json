@@ -10,15 +10,15 @@
   "author": "Mike Reinstein",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.146.0",
+    "aws-sdk": "^2.172.0",
     "dotenv": "^4.0.0",
-    "moment": "^2.19.1",
+    "moment": "^2.20.1",
     "node-lifx": "^0.8.0",
     "node-record-lpcm16": "^0.3.0",
     "numbered": "^1.1.0",
     "request": "^2.83.0",
     "snowboy": "^1.1.0",
     "speaker": "^0.4.0",
-    "watson-developer-cloud": "^2.42.0"
+    "watson-developer-cloud": "^3.0.3"
   }
 }
